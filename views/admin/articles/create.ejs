@@ -1,0 +1,120 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <!-- Up menu  -->
+    <%- include('../partials/navbar.ejs') %>
+
+    <!-- Side menu  -->
+    <%- include('../partials/menu.ejs') %>
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0">Nuevo Artículo</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/admin">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/articulos">Artículos</a>
+                                </li>
+                                <li
+                                    class="breadcrumb-item active"
+                                    aria-current="page"
+                                >
+                                    Nuevo Artículo
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="card-title">Registrar Artículo</h4>
+                            
+                            </div>
+                            <form method="POST" action="/articulos">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="name">Categoría para el producto</label>
+                                            <select class="form-control" name="id_category">
+                                                <% categorias.map((categoria) => {  %>
+                                                    <option value="<%= categoria._id %>"><%= categoria.name %></option>
+                                                <% }) %>
+                                              </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="name">Nombre del artículo</label>
+                                            <input required type="text" class="form-control" id="name" name="name" placeholder="Introduce el nombre del artículo">
+                                          </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="code">Código del artículo</label>
+                                            <input required type="text" class="form-control" id="code" name="code" placeholder="Introduce el código del artículo">
+                                          </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="price">Precio del artículo</label>
+                                            <input required type="text" class="form-control" id="price" name="price" placeholder="Introduce el precio del artículo">
+                                          </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="stock">Stock del artículo</label>
+                                            <input required type="number" class="form-control" id="stock" name="stock" placeholder="Introduce el stock del artículo">
+                                          </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="description">Descripción del artículo</label>
+                                            <textarea class="form-control" id="description" name="description" placeholder="Introduce una descripción del artículo" rows="3" ></textarea>
+                                          </div>
+                                    </div>
+                                </div>
+                                  
+
+                                
+                                
+                                
+                                    <div class="form-group d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary mb-2">Registrar Artículo</button>
+                                    </div>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('../partials/footer.ejs') %>

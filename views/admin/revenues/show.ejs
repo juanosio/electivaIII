@@ -1,0 +1,100 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <!-- Up menu  -->
+    <%- include('../partials/navbar.ejs') %>
+
+    <!-- Side menu  -->
+    <%- include('../partials/menu.ejs') %>
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0">Listado de Ingresos</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/admin">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/ingresos">Ingresos</a>
+                                </li>
+                                
+                                <li
+                                    class="breadcrumb-item active"
+                                    aria-current="page"
+                                >
+                                    Ver ingreso
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h2 class="card-title">Compra el <%= moment(venta.createdAt).format('DD MMM YYYY') %></h2>
+                                <h2 class="card-title">Total: <%= venta.total %> Bs.</h2>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <h3><%= venta.supplier.name %></h3>
+                            <p>Número de comprobante: <b><%= venta.comprobanteNro %></b></p>
+                            <p>Tipo de comprobante: <b><%= venta.comprobanteType %></b></p>
+                            <p>Número de serie del comprobante: <b><%= venta.comprobanteSerie %></b></p>
+                            <hr>
+                            <h5>Artículos comprados</h5>
+                            <table class="table text-center">
+                                <thead class="bg-info text-white">
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad comprada</th>
+                                    <th scope="col">Precio de compra</th>
+                                    <th scope="col">Subtotal</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <% venta.articles.map((article, index) => {  %>
+                                  <tr>
+                                    <th scope="row"><%= index + 1 %></th>
+                                    <td><%= article.name %></td>
+                                    <td><%= article.quantity %></td>
+                                    <td><%= article.priceBuy %> Bs.</td>
+                                    <td><%= article.subtotal %> Bs.</td>
+                                  </tr>
+                                  <% }) %>
+                                </tbody>
+                              </table>
+                              
+                              
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('../partials/footer.ejs') %>

@@ -1,0 +1,73 @@
+<%- include('./partials/header.ejs') %>
+
+<body>
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
+
+	<!-- Up menu  -->
+	<%- include('./partials/navbar.ejs') %>
+
+	<!-- Side menu  -->
+	<%- include('./partials/menu.ejs') %>
+
+	<div class="page-wrapper">
+		<!-- ============================================================== -->
+		<!-- Bread crumb and right sidebar toggle -->
+		<!-- ============================================================== -->
+		<div class="page-breadcrumb">
+			<div class="row align-items-center">
+				<div class="col-md-6 col-8 align-self-center">
+					<h3 class="page-title mb-0 p-0">Dashboard</h3>
+					<div class="d-flex align-items-center">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">Home</a>
+								</li>
+								<li
+									class="breadcrumb-item active"
+									aria-current="page"
+								>
+									Dashboard
+								</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<!-- ============================================================== -->
+			<!-- Start Page Content -->
+			<!-- ============================================================== -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div
+								class="jumbotron"
+								style="padding-bottom: 1.5rem"
+							>
+								<h1 class="display-4">¡Bienvenido!</h1>
+								<p class="lead">
+									Está es una practica para la materia de
+									Electiva III - Informática.
+								</p>
+								<hr class="my-4" />
+								<p style="margin: 0">Juan Osio V-26.715.734.</p>
+								<p style="margin: 0">Trayecto IV</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<%- include('./partials/footer.ejs') %>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,134 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
+
+	<!-- Up menu  -->
+	<%- include('../partials/navbar.ejs') %>
+
+	<!-- Side menu  -->
+	<%- include('../partials/menu.ejs') %>
+
+	<div class="page-wrapper">
+		<!-- ============================================================== -->
+		<!-- Bread crumb and right sidebar toggle -->
+		<!-- ============================================================== -->
+		<div class="page-breadcrumb">
+			<div class="row align-items-center">
+				<div class="col-md-6 col-8 align-self-center">
+					<h3 class="page-title mb-0 p-0">Listado de Proveedores</h3>
+					<div class="d-flex align-items-center">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/admin">Home</a>
+								</li>
+								<li
+									class="breadcrumb-item active"
+									aria-current="page"
+								>
+									Proveedores
+								</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<!-- ============================================================== -->
+			<!-- Start Page Content -->
+			<!-- ============================================================== -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex">
+								<h4 class="card-title">Proveedores</h4>
+								<a
+									href="/proveedores/crear"
+									class="btn btn-primary ml-auto"
+									style="
+										height: 35px;
+										background: #26c6da;
+										border: none;
+									"
+									>Nuevo</a
+								>
+							</div>
+							<%- include('../partials/messages.ejs') %>
+							<div class="table-responsive">
+								<table class="table user-table">
+									<thead>
+										<tr>
+											<th class="border-top-0">#</th>
+											<th class="border-top-0">Nombre</th>
+											<th class="border-top-0">
+												Descripción
+											</th>
+											<th class="border-top-0">
+												Acciones
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% proveedores.map((proveedor, index) =>
+										{ %>
+										<tr>
+											<td><%= index + 1 %></td>
+											<td><%= proveedor.name %></td>
+											<td>
+												<%= proveedor.description %>
+											</td>
+											<td>
+												<a
+													href="/proveedor/editar/<%= proveedor._id %>"
+												>
+													<i
+														class="mdi mr-2 mdi-lead-pencil"
+													></i>
+												</a>
+												<a
+													id="delete"
+													data-doc="<%= proveedor._id %>"
+												>
+													<i
+														class="mdi mr-2 mdi-delete"
+													></i>
+												</a>
+											</td>
+										</tr>
+
+										<% }) %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+				const deleteSupplier = document.querySelector("#delete");
+				deleteSupplier.addEventListener("click", (e) => {
+					e.preventDefault();
+					const endpoint = `/proveedor/${deleteSupplier.dataset.doc}`;
+					fetch(endpoint, {
+						method: "DELETE",
+					})
+						.then((response) => response.json())
+						.then((data) => (window.location.href = data.redirect))
+						.catch((err) => console.log(err));
+				});
+			</script>
+
+			<%- include('../partials/footer.ejs') %>
+		</div>
+	</div>
+</body>

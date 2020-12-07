@@ -1,0 +1,95 @@
+<script>
+
+    const $btnDelete = document.getElementById("delete") 
+    const $tableArticle = document.getElementById("table-article-info");
+    const $alertError = document.getElementById("alert-error");
+    const $total = document.getElementById("total");
+    const subTotals = []
+
+    function deleteRow(target){
+        const $deleteRow = document.getElementById(target.dataset.doc)
+        
+        console.log($deleteRow)
+        $tableArticle.removeChild($deleteRow)
+
+      
+    }
+    
+    function error(error) {
+        $alertError.innerHTML = "";
+        const alert = `<div class="alert alert-danger" role="alert">
+                            ${error}
+                        </div>`;
+
+        $alertError.innerHTML = alert;
+    }
+
+    // async function verifyStock(article, quantity){
+    //     const endpoint = `/verificarStock/${article}/${quantity}`;
+    //     const response = await fetch(endpoint, {
+    //         method: 'GET',
+    //     });
+    //     const data = await response.json(); 
+
+    //     return data.ok              
+        
+    // }
+
+    async function addArticle(article, quantity, priceBuy, priceSale) {
+        
+
+        //Verifico que no mande campos vacios
+        if(quantity === 0 || priceBuy === 0 || priceSale === 0){
+            return error("No puedes agregar un artículo con datos vacíos")
+        }
+
+        //Verifico existencia
+        //const stockExist = await verifyStock(article, quantity)
+        //if(!stockExist) return error("La cantidad de artículos sobre pasa la cantidad en existencia")
+
+        $alertError.innerHTML = "";
+        const subtotal = quantity * priceBuy;
+        const newArticle = `<tr id="${article}">        
+                                <td>
+                                    ${article}
+                                    <input type="text" hidden name="article[]" value="${article}">
+                                </td>
+                                <td>
+                                    ${quantity}
+                                    <input type="text" hidden name="quantity[]" value="${quantity}">
+                                </td>
+                                <td>
+                                    ${priceBuy} Bs.
+                                    <input type="text" hidden name="priceBuy[]" value="${priceBuy}">
+                                    </td>
+                                <td>
+                                    ${priceSale} Bs.
+                                    <input type="text" hidden name="priceSale[]" value="${priceSale}">
+                                    </td>
+                                <td>
+                                    ${subtotal} Bs.
+                                    <input type="text" hidden name="subtotal[]" value="${subtotal}">
+                                    </td>
+                                <td>
+                                    <a id="delete" data-doc="${article}" onclick="deleteRow(this)">
+                                        <i class="mdi mr-2 mdi-delete" style="font-size: 20px;"></i>
+                                    </a>
+                                </td>
+                                </tr>`;
+        subTotals.push(subtotal)
+        const total = subTotals.reduce((accumulator, currentValue) => accumulator + currentValue)
+        $total.innerHTML = total
+        $tableArticle.innerHTML += newArticle;
+    }                
+    
+    const buttonAddArticle = document.getElementById("add-article");
+    buttonAddArticle.addEventListener("click", function(e) {
+        e.preventDefault();
+        const $article = document.getElementById("article").value;
+        const $quantity = Number(document.getElementById("quantity").value);
+        const $priceBuy = Number(document.getElementById("price-buy").value);
+        const $priceSale = Number(document.getElementById("price-sale").value);
+
+        addArticle($article, $quantity, $priceBuy, $priceSale)
+    })
+</script>

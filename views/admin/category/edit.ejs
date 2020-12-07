@@ -1,0 +1,79 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <!-- Up menu  -->
+    <%- include('../partials/navbar.ejs') %>
+
+    <!-- Side menu  -->
+    <%- include('../partials/menu.ejs') %>
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0">Editar Categoría</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/admin">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/categorias">Almacen</a>
+                                </li>
+                                <li
+                                    class="breadcrumb-item active"
+                                    aria-current="page"
+                                >
+                                    Editar Categoría
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="card-title">Editar Categoría</h4>
+                            
+                            </div>
+                            <form method="POST" action="/categoria/<%= categoria._id %>">
+                                <div class="form-group">
+                                  <label for="name">Nombre de la categoría</label>
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Introduce el nombre de la categoría" value="<%= categoria.name %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Descripción de la categoría</label>
+                                    <textarea class="form-control" id="description" name="description" placeholder="Introduce una descripción de la categoría" rows="3" ><%= categoria.description %></textarea>
+                                  </div>
+                                    <div class="form-group d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary mb-2">Editar Categoría</button>
+                                    </div>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('../partials/footer.ejs') %>
