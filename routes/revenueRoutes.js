@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const moment = require("moment");
+const isAuthenticated = require("../middlewares/authVerify")
 
 const Article = require("../models/Article");
 const Supplier = require("../models/Supplier");
@@ -37,7 +38,7 @@ async function updateStock(article, quantity) {
 	}
 }
 
-router.get("/ingresos", (_, res) => {
+router.get("/ingresos", isAuthenticated, (_, res) => {
 	Revenue.find()
 		.sort({ createdAt: "desc" })
 		.populate("supplier", "name")
@@ -56,7 +57,7 @@ router.get("/ingresos", (_, res) => {
 		});
 });
 
-router.get("/ingresos/crear", async (_, res) => {
+router.get("/ingresos/crear", isAuthenticated, async (_, res) => {
 	const articles = await Article.find({}).sort({ createdAt: "desc" });
 	const suppliers = await Supplier.find({}).sort({ name: "asc" });
 	res.render("./admin/revenues/create", {
@@ -65,7 +66,7 @@ router.get("/ingresos/crear", async (_, res) => {
 	});
 });
 
-router.get("/verificarStock/:article/:quantity", async (req, res) => {
+router.get("/verificarStock/:article/:quantity", isAuthenticated, async (req, res) => {
 	let { article, quantity } = req.params;
 	const articleDB = await Article.findOne({ name: article }).sort({
 		createdAt: "desc",
@@ -78,7 +79,7 @@ router.get("/verificarStock/:article/:quantity", async (req, res) => {
 	return res.json({ ok: true });
 });
 
-router.post("/ingresos", async (req, res) => {
+router.post("/ingresos", isAuthenticated, async (req, res) => {
 	//Haciendo el listado de los articulos comprados
 
 	let listArticle = [];
@@ -132,7 +133,7 @@ router.post("/ingresos", async (req, res) => {
 });
 
 //Watch
-router.get("/ingresos/ver/:id", (req, res) => {
+router.get("/ingresos/ver/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 
 	Revenue.findById(id)

@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 const Supplier = require("../models/Supplier.js");
+const isAuthenticated = require("../middlewares/authVerify")
 
 //Index
-router.get("/proveedores", (req, res) => {
+router.get("/proveedores", isAuthenticated, (req, res) => {
 	Supplier.find()
 		.sort({ createdAt: "desc" })
 		.then((suppliers) => {
@@ -21,12 +22,12 @@ router.get("/proveedores", (req, res) => {
 });
 
 //Create
-router.get("/proveedores/crear", (req, res) => {
+router.get("/proveedores/crear", isAuthenticated, (req, res) => {
 	res.render("./admin/supplier/create");
 });
 
 //Store
-router.post("/proveedores", (req, res) => {
+router.post("/proveedores", isAuthenticated, (req, res) => {
 	const { name, description } = req.body;
 	const supplier = new Supplier({
 		name,
@@ -45,7 +46,7 @@ router.post("/proveedores", (req, res) => {
 });
 
 //Edit
-router.get("/proveedor/editar/:id", (req, res) => {
+router.get("/proveedor/editar/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 
 	Supplier.findById(id)
@@ -65,7 +66,7 @@ router.get("/proveedor/editar/:id", (req, res) => {
 });
 
 //Update
-router.post("/proveedor/:id", (req, res) => {
+router.post("/proveedor/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 	const data = req.body;
 
@@ -87,7 +88,7 @@ router.post("/proveedor/:id", (req, res) => {
 });
 
 //Delete
-router.delete("/proveedor/:id", (req, res) => {
+router.delete("/proveedor/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 	Supplier.findByIdAndDelete(id)
 		.then((result) => {

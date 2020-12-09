@@ -23,20 +23,6 @@ if (process.env.NODE_ENV === "dev") {
 process.env.URLDB = urlDB;
 
 //--------------------------------------
-//        VENCIMIENTO DEL TOKEN
-//60 segundos
-//60 minutos
-//24 horas
-//30 dias
-//--------------------------------------
-process.env.EXPIRE_TOKEN = 60 * 60 * 24 * 30;
-
-//--------------------------------------
-//         SEED de Autenticacion
-//--------------------------------------
-process.env.SEED_TOKEN = process.env.SEED_TOKEN || "this-is-a-seed-development";
-
-//--------------------------------------
 //           SEED de Sesion
 //--------------------------------------
 process.env.SEED_SESION =

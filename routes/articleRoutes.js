@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-
+const isAuthenticated = require("../middlewares/authVerify")
 const Article = require("../models/Article");
 const Category = require("../models/Category");
 
@@ -26,7 +26,7 @@ router.get("/articulos", (req, res) => {
 });
 
 //Create
-router.get("/articulos/crear", (_, res) => {
+router.get("/articulos/crear",  (_, res) => {
 	Category.find()
 		.then((categories) => {
 			res.render("./admin/articles/create", {

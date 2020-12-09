@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const isAuthenticated = require("../middlewares/authVerify")
 
 const bcrypt = require("bcrypt");
 const passport = require("passport");
@@ -7,7 +8,7 @@ const User = require("../models/User.js");
 
 const router = Router();
 
-router.get("/admin", (req, res) => {
+router.get("/admin", isAuthenticated, (req, res) => {
 	res.render("./admin/index");
 });
 
@@ -69,8 +70,17 @@ router.post("/registrarse", (req, res) => {
 
 		req.flash("info", {ok: true, msg: "Usuario registrado satisfactoriamente"});
 		res.render("./login/index");
-
+		
 	});
+});
+
+
+router.get("/logout", (req, res) => {
+	
+	req.logout();
+	req.flash("info", {ok: true, msg: "Sesión cerrada"});
+	res.render('./login/index');
+
 });
 
 module.exports = router;

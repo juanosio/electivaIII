@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const Category = require("../models/Category.js");
+const isAuthenticated = require("../middlewares/authVerify")
 
 const router = Router();
 
 //Index
-router.get("/categorias", (_, res) => {
+router.get("/categorias", isAuthenticated, (_, res) => {
 	Category.find()
 		.sort({ createdAt: "desc" })
 		.then((categories) => {
@@ -22,7 +23,7 @@ router.get("/categorias", (_, res) => {
 });
 
 //Create
-router.get("/categorias/crear", (_, res) => {
+router.get("/categorias/crear", isAuthenticated, (_, res) => {
 	res.render("./admin/category/create");
 });
 
@@ -46,7 +47,7 @@ router.post("/categorias", (req, res) => {
 });
 
 //Edit
-router.get("/categoria/editar/:id", (req, res) => {
+router.get("/categoria/editar/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 
 	Category.findById(id)
@@ -66,7 +67,7 @@ router.get("/categoria/editar/:id", (req, res) => {
 });
 
 //Update
-router.post("/categoria/:id", (req, res) => {
+router.post("/categoria/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 	const data = req.body;
 
@@ -87,7 +88,7 @@ router.post("/categoria/:id", (req, res) => {
 	});
 });
 
-router.delete("/categoria/:id", (req, res) => {
+router.delete("/categoria/:id", isAuthenticated, (req, res) => {
 	const id = req.params.id;
 	Category.findByIdAndDelete(id)
 		.then((result) => {
