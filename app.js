@@ -5,7 +5,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes/index");
-const morgan = require("morgan");
 const session = require("express-session");
 const flash = require('connect-flash');
 const passport = require("passport");
@@ -37,8 +36,6 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 // application/json
 app.use(bodyParser.json());
-//Morgan
-app.use(morgan("dev"));
 //Sesiones
 app.use(session({
 	secret: process.env.SEED_SESION,
