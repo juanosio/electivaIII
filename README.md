@@ -1,6 +1,6 @@
 # App Ventas - Electiva IV
 
-Esta es una app de compra y venta para un inventario para la **unidad curricular de electiva IV**, puedes ver la [demo aquí](http://www.dropwizard.io/1.0.2/docs/) para ver el funcionamiento del proyecto.
+Esta es una app de compra y venta para un inventario para la **unidad curricular de electiva IV**, puedes ver la [demo aquí](https://compra-venta-electiva-iii.herokuapp.com/) para ver el funcionamiento del proyecto.
 
 ## Comenzando 🚀
 
